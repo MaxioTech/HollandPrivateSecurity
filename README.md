@@ -37,6 +37,7 @@ Simply create a new file named `config.json` and copy paste the following into t
 }
 ```
 Then insert the TOKEN and IDs required.
+Once the config file is done, simply type `npm install` in the terminal/console to install the required dependencies.
   
 ### Bugs/Issues
 If you experience bugs/issues, please report them and they'll be fixed asap.
