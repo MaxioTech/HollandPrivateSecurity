@@ -30,9 +30,6 @@ Simply create a new file named `config.json` and copy paste the following into t
     "Channels": {
         "spamchannel": "CHANNEL ID",
         "panicbutton": "CHANNEL ID"
-    },
-    "Categories": {
-        "reports": "CATEGORY ID"
     }
 }
 ```
