@@ -1,8 +1,8 @@
 # Holland Private Security (Discord Bot)
 
 ## Commands:
-!pb <contract number>
-!stop <contract number>
+!pb <contract number><br>
+!stop <contract number><br>
 !cc (clear channel, requires administrator permission)
 
 ## How to use:
