@@ -21,13 +21,12 @@ module.exports = (client, maintenance) => {
                 commandBase(client, command, message, maintenance);
             }
             catch(e) {
-                console.log(e);
-                return;
                 // command not found
                 const embed = new MessageEmbed()
                 .setColor('RED')
                 .setDescription(`${cmdName} is not a command.`);
                 message.channel.send(embed).then(m=>m.delete({timeout: 5000}));
+                message.delete();
             }
         }
 

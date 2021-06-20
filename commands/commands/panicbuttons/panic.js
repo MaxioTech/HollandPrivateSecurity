@@ -1,5 +1,5 @@
 const { MessageEmbed, Channel, Collection } = require('discord.js');
-const { Channels, Categories } = require("@root/config.json");
+const { Channels } = require("@root/config.json");
 
 module.exports = {
     enabled: true,

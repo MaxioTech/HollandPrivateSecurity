@@ -1,5 +1,4 @@
-const { MessageEmbed, Collection } = require('discord.js');
-const { Channels } = require("@root/config.json");
+const { Collection } = require('discord.js');
 
 module.exports = {
     enabled: true,
@@ -29,8 +28,6 @@ module.exports = {
         clearInterval(client.panicSpam.get(contractNumber));
 
         const contract = message.guild.channels.cache.find(c=>c.name === `contract-${contractNumber}`);
-
-        const panics = new Collection();
 
         spamChannel.messages.fetch()
         .then(results=>{

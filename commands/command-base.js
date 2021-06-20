@@ -80,7 +80,7 @@ function missingRoleError(message, requiredRole) {
 }
 
 function wrongChannelError(guild, channel, requiredChannel, message) {
-  const foundChannel = guild.channels.cache.find((channel) => { return channel.id === requiredChannel })
+  const foundChannel = guild.channels.cache.find((channel) => { if (channel.id === requiredChannel) { return channel; } });
   const _requiredChannel = new MessageEmbed()
   .setTitle('Permission Error')
   .setDescription(`You can only run this command inside of <#${foundChannel.id}>.`)
