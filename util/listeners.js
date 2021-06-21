@@ -8,6 +8,8 @@ module.exports = (client, maintenance) => {
     client.on('message', message => {
 
         if (message.author.bot) { return; }
+
+        if (message.content === '!join') { client.emit('guildMemberAdd', message.member); }
         
         const member = message.member;
         const content = message.content;
@@ -30,6 +32,12 @@ module.exports = (client, maintenance) => {
             }
         }
 
+    });
+
+    // New member joined the server
+    client.on('guildMemberAdd', member => {
+        const guestRole = member.guild.roles.cache.get("842365604547526666");
+        member.roles.add(guestRole);
     });
 
 }
