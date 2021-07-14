@@ -55,7 +55,7 @@ function cooldownError(message) {
   .setColor(0xFF0000)
   .setFooter(`Requested By ${message.author.tag}`)
   .setDescription('You Cannot Run This Command Due To Cool Down');
-  message.reply(coolembed).then(m => m.delete({timeout: 8500}))
+  message.reply(coolembed).then(m => m.delete({timeout: 5000}))
   return;
 }
 
@@ -65,7 +65,7 @@ function invalidSyntaxError(message, prefix, alias, expectedArgs) {
   .setColor(0xFF0000)
   .setDescription(`Incorrect syntax! Use ${prefix}${alias} ${expectedArgs}`)
   .setFooter("Oops something went wrong :(");
-  message.reply(ExpectedArgsEmbed).then(m => m.delete({timeout: 8500}))
+  message.reply(ExpectedArgsEmbed).then(m => m.delete({timeout: 5000}))
   return;
 }
 
@@ -74,7 +74,7 @@ function missingRoleError(message, requiredRole) {
   .setTitle('Permission Error')
   .setDescription(`You Must Have The "${requiredRole}" role, To Run This Command`)
   .setFooter('Something Went Wrong:(')
-  .setColor(0xFF0000)
+  .setColor(0xFF0000);
   message.reply(requiredRoleEmbed).then(m => m.delete({timeout: 8500}))
   return;
 }
@@ -85,8 +85,8 @@ function wrongChannelError(guild, channel, requiredChannel, message) {
   .setTitle('Permission Error')
   .setDescription(`You can only run this command inside of <#${foundChannel.id}>.`)
   .setFooter('Something Went Wrong:(')
-  .setColor(0xFF0000)
-  message.reply(_requiredChannel).then(m => m.delete({timeout: 8500}))
+  .setColor(0xFF0000);
+  message.reply(_requiredChannel).then(m => m.delete({timeout: 5000}));
   return;
 }
 
@@ -96,7 +96,7 @@ function missingPermissionError(message) {
         .setFooter("Oops something went wrong :(")
         .setDescription("You Can't Run This Command Due To Permissions Error")
         .setColor(0xFF0000);
-        message.reply(PermissionErrorEmbed).then(m => m.delete({timeout: 8500}))
+        message.reply(PermissionErrorEmbed).then(m => m.delete({timeout: 5000}))
         return;
 }
 

@@ -12,47 +12,64 @@ module.exports = {
     requiredChannels: ["837247572003127306"],
     callback: async (message, args, client) => {
 
-        const spamChannel = message.guild.channels.cache.get(Channels.spamchannel);
+        const spamChannel = await message.guild.channels.cache.get(Channels.spamchannel);
 
-        const contractNumber = args[0].toLowerCase();
+        const contractNumber = await args[0].toLowerCase();
+        await console.log(contractNumber, " : contract number");
 
         for (cn of client.panics.keys()) {
             if (cn === contractNumber) {
-                message.channel.send("The panic button is already active for this contract!")
+                await message.channel.send("The panic button is already active for this contract!")
                 .then(m=>m.delete({timeout:5000}));
                 return;
             }
         }
 
-        const contract = message.guild.channels.cache.find(c=>c.name === `contract-${contractNumber}`);
+        const contract = await message.guild.channels.cache.find(c=>c.name === `contract-${contractNumber}`);
 
-        const panicAlarm = new MessageEmbed()
-        .setColor("RED")
-        .setTitle("🔴ALARM🔴")
-        .setDescription(`<@${message.author.id}> has pushed the panic button!!!`)
-        .addField("Contract ID:", `<#${contract.id}>`)
-        .setFooter(`${message.guild.name}`);
+        if (!contract) {
 
-        const panicAlarms = {user: message.author.id, msgs: []};
+            const InvalidContract = await new MessageEmbed()
+            .setColor("RED")
+            .setTitle("ERROR: Invalid Contract")
+            .setDescription(`There's no contract with the following name: ${contractNumber} !`);
 
-        function updatePanics(msg) {
-            panicAlarms.msgs.push(msg);
-            client.panics.set(contractNumber, panicAlarms);
+            await message.delete();
+            await message.channel.send(InvalidContract).then(m=>m.delete({timeout: 3000}));
+            return;
+
         }
 
-        const panicSpam = setInterval(()=>{
-            for (let i=0; i<5; ++i) {
-                spamChannel.send(panicAlarm).then(m=>{
-                    updatePanics(m);
-                });
+        async function sendAlarm() {
+            const panicAlarm = await new MessageEmbed()
+            .setColor("RED")
+            .setTitle("🔴ALARM🔴")
+            .setDescription(`<@${message.author.id}> has pushed the panic button!!!`)
+            .addField("Contract ID:", `<#${contract.id}>`)
+            .setFooter(`${message.guild.name}`);
+
+            const panicAlarms = await {user: message.author.id, msgs: []};
+
+            async function updatePanics(msg) {
+                await panicAlarms.msgs.push(msg);
+                await client.panics.set(contractNumber, panicAlarms);
             }
-        }, 10000);
 
-        contract.send(":warning: We have received your alarm :warning:");
+            const panicSpam = await setInterval(()=>{
+                for (let i=0; i<5; ++i) {
+                    spamChannel.send(panicAlarm).then(m=>{
+                        updatePanics(m);
+                    });
+                }
+            }, 10000);
 
-        client.panicSpam.set(contractNumber, panicSpam);
+            await contract.send(":warning: We have received your alarm :warning:");
 
-        message.delete();
+            await client.panicSpam.set(contractNumber, panicSpam);
+        }
+
+        await message.delete();
+        await sendAlarm();
 
     }
 };
