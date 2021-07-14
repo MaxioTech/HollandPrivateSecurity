@@ -1,0 +1,14 @@
+{
+    "prefix": "!",
+    "Bot": {
+        "token": "INSERT-TOKEN-HERE",
+        "guild": "GUILD-ID"
+    },
+    "Channels": {
+        "spamchannel": "CHANNEL-ID",
+        "panicbutton": "CHANNEL-ID"
+    },
+    "Roles": {
+        "hpsRole": "ROLE-ID"
+    }
+}

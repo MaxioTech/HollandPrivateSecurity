@@ -18,22 +18,7 @@ type `!cc` to delete messages (up to 14 days old) from the channel it's used in.
 (this command can only be used if the user has the "administrator" permission)
 
 ## Why it cannot run?
-The project is missing the `config.json` file on purpose, to keep the token secret.<br>
-Simply create a new file named `config.json` and copy paste the following into the file
-```json
-{
-    "prefix": "!",
-    "Bot": {
-        "token": "INSERT TOKEN HERE",
-        "guild": "GUILD ID"
-    },
-    "Channels": {
-        "spamchannel": "CHANNEL ID",
-        "panicbutton": "CHANNEL ID"
-    }
-}
-```
-Then insert the TOKEN and IDs required.<br>
+The `config.json` file is missing the token, so simply enter the token and you're done
 Once the config file is done, simply type `npm install` in the terminal/console to install the required dependencies.
 
 When done with the above, type `npm start` in the terminal/console to start the bot.

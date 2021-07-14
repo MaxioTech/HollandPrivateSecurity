@@ -13,6 +13,7 @@ module.exports = {
     callback: async (message, args, client) => {
 
         const spamChannel = await message.guild.channels.cache.get(Channels.spamchannel);
+        const hpsRole = await message.guild.roles.cache.get(hpsRole);
 
         const contractNumber = await args[0].toLowerCase();
         await console.log(contractNumber, " : contract number");
@@ -64,6 +65,10 @@ module.exports = {
             }, 10000);
 
             await contract.send(":warning: We have received your alarm :warning:");
+
+            await contract.send(`${hpsRole}`).then(msg=>{
+                msg.delete();
+            });
 
             await client.panicSpam.set(contractNumber, panicSpam);
         }
