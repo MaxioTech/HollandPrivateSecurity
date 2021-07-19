@@ -1,5 +1,5 @@
 const { MessageEmbed, Channel, Collection } = require('discord.js');
-const { Channels } = require("@root/config.json");
+const { Channels, Roles } = require("@root/config.json");
 
 module.exports = {
     enabled: true,
@@ -13,7 +13,7 @@ module.exports = {
     callback: async (message, args, client) => {
 
         const spamChannel = await message.guild.channels.cache.get(Channels.spamchannel);
-        const hpsRole = await message.guild.roles.cache.get(hpsRole);
+        const hpsRole = await message.guild.roles.cache.get(Roles.hpsRole);
 
         const contractNumber = await args[0].toLowerCase();
         await console.log(contractNumber, " : contract number");
